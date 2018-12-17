@@ -6,6 +6,8 @@ if [ -z "$ANDROID_NDK" ]; then
     exit 1
 fi
 
+
 FF_MAKEFLAGS=-j`nproc`
 
+cd src/jni
 $ANDROID_NDK/ndk-build $FF_MAKEFLAGS
