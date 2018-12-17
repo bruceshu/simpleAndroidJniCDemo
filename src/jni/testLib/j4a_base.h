@@ -42,5 +42,9 @@ void J4A_DeleteLocalRef__p(JNIEnv *env, jobject *obj);
 jclass J4A_FindClass__asGlobalRef__catchAll(JNIEnv *env, const char *class_sign);
 jfieldID J4A_GetStaticFieldID__catchAll(JNIEnv *env, jclass clazz, const char *field_name, const char *field_sign);
 
+int SDL_JNI_ThrowException(JNIEnv* env, const char* className, const char* msg)
+
+int J4A_LoadAll__catchAll(JNIEnv *env);
+
 
 #endif

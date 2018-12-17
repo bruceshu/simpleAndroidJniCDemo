@@ -22,7 +22,7 @@ static simple_test g_clazz;
 MessageQueue msg_queue = {0};
 
 static JavaVM* g_jvm;
-static JNIEnv* g_env;
+//static JNIEnv* g_env;
 
 
 #define IJK_FIND_JAVA_CLASS(env__, var__, classsign__) \
@@ -51,6 +51,9 @@ static JNIEnv* g_env;
         } \
     }while(0)
 
+#ifndef NELEM
+#define NELEM(x) ((int) (sizeof(x) / sizeof((x)[0])))
+#endif
 
 static void SimpleTest_native_begin(JNIEnv *env, jobject thiz)
 {
