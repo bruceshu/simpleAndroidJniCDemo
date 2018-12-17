@@ -8,6 +8,8 @@ Description:
 
 #include <android/log.h>
 #include <jni.h>
+#include <stdbool.h>
+
 
 
 #ifndef J4A_BASE_H
