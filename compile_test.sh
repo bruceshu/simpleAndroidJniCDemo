@@ -20,4 +20,4 @@ case $REQUEST_TARGET in
 	clean)
 		$ANDROID_NDK/ndk-build clean
 	;;
-	
+esac
