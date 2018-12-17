@@ -16,6 +16,6 @@ LOCAL_SRC_FILES += Build.c
 LOCAL_SRC_FILES += simple_android_jni_c_demo.c
 LOCAL_SRC_FILES += utils.c
 LOCAL_SRC_FILES += test_lib.c
-LOCAL_MODULE := ijkj4a
+LOCAL_MODULE := test_lib
 
 include $(BUILD_SHARED_LIBRARY)
