@@ -67,7 +67,7 @@ static JNINativeMethod g_methods[] = {
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 {
-    int retval;
+    //int retval;
     JNIEnv* env = NULL;
 
     g_jvm = vm;

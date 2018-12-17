@@ -9,7 +9,7 @@ LOCAL_LDLIBS += -llog -landroid
 LOCAL_C_INCLUDES += $(LOCAL_PATH)
 LOCAL_C_INCLUDES += $(realpath $(LOCAL_PATH))
 
-LOCAL_SRC_FILES += j4a_allclasses.c
+#LOCAL_SRC_FILES += j4a_allclasses.c
 LOCAL_SRC_FILES += j4a_base.c
 LOCAL_SRC_FILES += ijksdl_extra_log.c
 #LOCAL_SRC_FILES += Build.c
