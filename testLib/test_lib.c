@@ -39,9 +39,21 @@ static JNIEnv* g_env;
         (*env__)->DeleteLocalRef(env__, clazz); \
     } while(0);
 
+#define JNI_CHECK_RET(condition__, env__, exception__, msg__, ret__) \
+    do { \
+        if (!(condition__)) { \
+            if (exception__) { \
+                SDL_JNI_ThrowException(env__, exception__, msg__); \
+            } \
+            return ret__; \
+        } \
+    }while(0)
+
+
 static void SimpleTest_native_begin(JNIEnv *env, jobject thiz)
 {
     notify_msg1(&msg_queue, REQ_START);
+    ALOGI("bruce >>> hello world!");
 }
 
 static JNINativeMethod g_methods[] = {

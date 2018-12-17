@@ -17,9 +17,6 @@ void ffp_log_extra_print(int level, const char *tag, const char *fmt, ...)
 {
     JNIEnv *env = NULL;
 
-    if (JNI_OK != SDL_JNI_SetupThreadEnv(&env)) {
-        return;
-    }
     va_list ap;
     char log_buffer[LOG_BUF_SIZE] = {0};
 
@@ -54,9 +51,7 @@ void ffp_log_extra_print(int level, const char *tag, const char *fmt, ...)
 void ffp_log_extra_vprint(int level, const char *tag, const char *fmt, va_list ap)
 {
     JNIEnv *env = NULL;
-    if (JNI_OK != SDL_JNI_SetupThreadEnv(&env)) {
-        return;
-    }
+
     char log_buffer[LOG_BUF_SIZE] = {0};
 
     vsnprintf(log_buffer, LOG_BUF_SIZE, fmt, ap);
