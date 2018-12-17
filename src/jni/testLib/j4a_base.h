@@ -7,6 +7,7 @@ Description:
 */
 
 #include <android/log.h>
+#include <jni.h>
 
 
 #ifndef J4A_BASE_H
