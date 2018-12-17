@@ -6,7 +6,7 @@ package bruce_base.simple_android_jni_c_demo;
 
 public class test {
     private static volatile boolean mIsLibLoaded = false;
-    public static void loadLibrariesOnce() throws UnsatisfiedLinkError, SecurityException {
+    public static void loadLibrariesOnce() {
         if (!mIsLibLoaded) {
             System.loadLibrary("test_lib");
         }

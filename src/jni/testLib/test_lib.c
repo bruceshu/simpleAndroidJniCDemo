@@ -57,7 +57,7 @@ static JavaVM* g_jvm;
 
 static void SimpleTest_native_begin(JNIEnv *env, jobject thiz)
 {
-    notify_msg1(&msg_queue, REQ_START);
+    //notify_msg1(&msg_queue, REQ_START);
     ALOGI("bruce >>> hello world!");
 }
 
