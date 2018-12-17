@@ -9,5 +9,15 @@ fi
 
 FF_MAKEFLAGS=-j`nproc`
 
+
+REQUEST_TARGET=%1
+
 cd src/jni
-$ANDROID_NDK/ndk-build $FF_MAKEFLAGS
+case $REQUEST_TARGET in
+	"")
+		$ANDROID_NDK/ndk-build $FF_MAKEFLAGS
+	;;
+	clean)
+		$ANDROID_NDK/ndk-build clean
+	;;
+	
