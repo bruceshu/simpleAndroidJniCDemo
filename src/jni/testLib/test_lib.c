@@ -9,6 +9,7 @@ Description:
 
 #include "j4a_base.h"
 #include "ijksdl_log.h"
+#include "utils.h"
 
 #define REQ_START  1
 #define JNI_CLASS_TEST "bruce_base/simpleandroidjnicdemo/test"
@@ -61,7 +62,7 @@ static JNINativeMethod g_methods[] = {
     { "_native_begin", "()V", (void *) SimpleTest_native_begin },
 }
 
-JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
+JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 {
     int retval;
     JNIEnv* env = NULL;
