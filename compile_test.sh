@@ -10,7 +10,7 @@ fi
 FF_MAKEFLAGS=-j`nproc`
 
 
-REQUEST_TARGET=%1
+REQUEST_TARGET=$1
 
 cd src/jni
 case $REQUEST_TARGET in
@@ -19,5 +19,10 @@ case $REQUEST_TARGET in
 	;;
 	clean)
 		$ANDROID_NDK/ndk-build clean
+	;;
+	*)
+		echo "Usage:"
+		echo "compile_test.sh"
+		echo "compile_test.sh clean"
 	;;
 esac
