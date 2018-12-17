@@ -78,8 +78,8 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
     IJK_FIND_JAVA_CLASS(env, g_clazz.clazz, JNI_CLASS_TEST);
     (*env)->RegisterNatives(env, g_clazz.clazz, g_methods, NELEM(g_methods) );
 
-    retval = J4A_LoadAll__catchAll(env);
-    JNI_CHECK_RET(retval == 0, env, NULL, NULL, -1);
+    //retval = J4A_LoadAll__catchAll(env);
+    //JNI_CHECK_RET(retval == 0, env, NULL, NULL, -1);
 
     return JNI_VERSION_1_4;
 }
