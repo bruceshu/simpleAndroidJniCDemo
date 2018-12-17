@@ -8,6 +8,7 @@ Description:
 
 
 #include "j4a_base.h"
+#include "ijksdl_log.h"
 
 #define REQ_START  1
 #define JNI_CLASS_TEST "bruce_base/simpleandroidjnicdemo/test"

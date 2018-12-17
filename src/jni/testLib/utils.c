@@ -10,31 +10,7 @@ Description:
 #include <stdlib.h>
 #include <pthread.h>
 #include <assert.h>
-
-typedef struct SDL_mutex {
-    pthread_mutex_t id;
-} SDL_mutex;
-
-typedef struct SDL_cond {
-    pthread_cond_t id;
-} SDL_cond;
-
-typedef struct AVMessage {
-    int what;
-    int arg1;
-    int arg2;
-    void *obj;
-    void (*free_l)(void *obj);
-    struct AVMessage *next;
-} AVMessage;
-
-typedef struct MessageQueue {
-    AVMessage *first_msg, *last_msg;
-    int nb_messages;
-    int abort_request;
-    SDL_mutex *mutex;
-    SDL_cond *cond;
-} MessageQueue;
+#include "utils.h"
 
 int SDL_LockMutex(SDL_mutex *mutex)
 {
@@ -114,6 +90,7 @@ static void msg_queue_put_simple3(MessageQueue *q, int what, int arg1, int arg2)
     msg_queue_put(q, &msg);
 }
 
-void notify_msg1(MessageQueue *msg_queue, int what) {
+void notify_msg1(MessageQueue *msg_queue, int what) 
+{
     msg_queue_put_simple3(msg_queue, what, 0, 0);
 }
