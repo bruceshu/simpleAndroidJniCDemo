@@ -9,6 +9,8 @@ Description:
 #ifndef UTILS_H
 #define UTILS_H
 
+#include <pthread.h>
+
 typedef struct SDL_mutex {
     pthread_mutex_t id;
 } SDL_mutex;

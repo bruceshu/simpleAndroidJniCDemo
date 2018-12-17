@@ -60,7 +60,7 @@ static void SimpleTest_native_begin(JNIEnv *env, jobject thiz)
 
 static JNINativeMethod g_methods[] = {
     { "_native_begin", "()V", (void *) SimpleTest_native_begin },
-}
+};
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 {
