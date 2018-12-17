@@ -12,7 +12,7 @@ Description:
 #include "utils.h"
 
 #define REQ_START  1
-#define JNI_CLASS_TEST "bruce_base/simpleandroidjnicdemo/test"
+#define JNI_CLASS_TEST "bruce_base/simple_android_jni_c_demo/test"
 
 typedef struct simple_test {
     jclass clazz;
