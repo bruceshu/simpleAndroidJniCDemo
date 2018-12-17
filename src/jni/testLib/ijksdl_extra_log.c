@@ -7,7 +7,6 @@ Description:
 */
 
 #include "ijksdl_extra_log.h"
-#include "ijksdl_android_jni.h"
 #include <stdio.h>
 
 #define LOG_BUF_SIZE	1024

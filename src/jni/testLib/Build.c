@@ -6,6 +6,7 @@ Description:
 
 */
 
+#include "j4a_base.h"
 
 typedef struct J4AC_android_os_Build__VERSION {
     jclass id;
