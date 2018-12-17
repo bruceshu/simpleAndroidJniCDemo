@@ -1,4 +1,4 @@
-package bruce_base.simpleandroidjnicdemo;
+package bruce_base.simple_android_jni_c_demo;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package bruce_base.simpleandroidjnicdemo;
+package bruce_base.simple_android_jni_c_demo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("bruce_base.simpleandroidjnicdemo", appContext.getPackageName());
+        assertEquals("bruce_base.simple_android_jni_c_demo", appContext.getPackageName());
     }
 }
