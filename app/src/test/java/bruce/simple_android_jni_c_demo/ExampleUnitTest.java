@@ -1,11 +1,11 @@
-package bruce_base.simple_android_jni_c_demo;
+package bruce.simple_android_jni_c_demo;
 
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
+ * Example local unit TestDemo, which will execute on the development machine (host).
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */

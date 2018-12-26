@@ -34,15 +34,19 @@ Description:
             goto fail; \
     } while (0)
 
-bool J4A_ExceptionCheck__catchAll(JNIEnv *env);
-jclass J4A_NewGlobalRef__catchAll(JNIEnv *env, jobject obj);
-jclass J4A_FindClass__catchAll(JNIEnv *env, const char *class_sign);
-void J4A_DeleteLocalRef(JNIEnv *env, jobject obj);
-void J4A_DeleteLocalRef__p(JNIEnv *env, jobject *obj);
-jclass J4A_FindClass__asGlobalRef__catchAll(JNIEnv *env, const char *class_sign);
-jfieldID J4A_GetStaticFieldID__catchAll(JNIEnv *env, jclass clazz, const char *field_name, const char *field_sign);
+
 
 int SDL_JNI_ThrowException(JNIEnv* env, const char* className, const char* msg);
+bool J4A_ExceptionCheck__catchAll(JNIEnv *env);
+jclass J4A_NewGlobalRef__catchAll(JNIEnv *env, jobject obj);
+void J4A_DeleteLocalRef(JNIEnv *env, jobject obj);
+void J4A_DeleteLocalRef__p(JNIEnv *env, jobject *obj);
+jclass J4A_FindClass__catchAll(JNIEnv *env, const char *class_sign);
+jclass J4A_FindClass__asGlobalRef__catchAll(JNIEnv *env, const char *class_sign);
+jfieldID J4A_GetStaticFieldID__catchAll(JNIEnv *env, jclass clazz, const char *field_name, const char *field_sign);
+jfieldID J4A_GetFieldID__catchAll(JNIEnv *env, jclass clazz, const char *field_name, const char *field_sign);
+jmethodID J4A_GetStaticMethodID__catchAll(JNIEnv *env, jclass clazz, const char *method_name, const char *method_sign);
+
 
 int J4A_LoadAll__catchAll(JNIEnv *env);
 

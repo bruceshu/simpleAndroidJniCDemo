@@ -16,7 +16,7 @@ int J4A_LoadAll__catchAll(JNIEnv *env)
 
     // load android.os.Build at very beginning
     J4A_LOAD_CLASS(android_os_Build);
-    J4A_LOAD_CLASS(bruce_base_simpleandroidjnicdemo);
+    J4A_LOAD_CLASS(bruce_simple_android_jni_c_demo);
 
 fail:
     return ret;

@@ -1,4 +1,4 @@
-package bruce_base.simple_android_jni_c_demo;
+package bruce.simple_android_jni_c_demo;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 /**
- * Instrumented test, which will execute on an Android device.
+ * Instrumented TestDemo, which will execute on an Android device.
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
@@ -18,9 +18,9 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
-        // Context of the app under test.
+        // Context of the app under TestDemo.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("bruce_base.simple_android_jni_c_demo", appContext.getPackageName());
+        assertEquals("bruce.simple_android_jni_c_demo", appContext.getPackageName());
     }
 }

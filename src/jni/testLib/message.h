@@ -1,23 +1,19 @@
 /*
 Copyright (c) bruce 3350207067@qq.com
 Auther: bruce
-Date: 2018/12/11
+Date: 2018/12/24
 Description:
 
 */
 
-#ifndef UTILS_H
-#define UTILS_H
 
-#include <pthread.h>
+#ifndef MESSAGE_H
+#define MESSAGE_H
 
-typedef struct SDL_mutex {
-    pthread_mutex_t id;
-} SDL_mutex;
+#include "sdl_thread.h"
 
-typedef struct SDL_cond {
-    pthread_cond_t id;
-} SDL_cond;
+#define MSG_SIMPLE_TEST_BEGIN                       0
+#define MSG_SIMPLE_TEST_END                         0
 
 typedef struct AVMessage {
     int what;
@@ -36,7 +32,11 @@ typedef struct MessageQueue {
     SDL_cond *cond;
 } MessageQueue;
 
+
 void notify_msg1(MessageQueue *msg_queue, int what);
+void msg_queue_abort(MessageQueue *q);
+void msg_free_res(AVMessage *msg);
+int ijkmp_get_msg(SimpleTest *simpleTest, AVMessage *msg, int block);
 
 
 #endif
