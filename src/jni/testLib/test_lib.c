@@ -7,8 +7,8 @@ Description:
 */
 
 
-#include "j4a/j4a_base.h"
-#include "sdl/sdl_log.h"
+#include "j4a_base.h"
+#include "sdl_log.h"
 
 #include "test_internal.h"
 
