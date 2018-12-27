@@ -7,15 +7,15 @@ Description:
 */
 
 
-#ifndef IJKSDL__IJKSDL_LOG_H
-#define IJKSDL__IJKSDL_LOG_H
+#ifndef SDL_LOG_H
+#define SDL_LOG_H
 
 #include <stdio.h>
 
 #ifdef __ANDROID__
 
 #include <android/log.h>
-#include "ijksdl_extra_log.h"
+#include "sdl_extra_log.h"
 
 #define IJK_LOG_UNKNOWN     ANDROID_LOG_UNKNOWN
 #define IJK_LOG_DEFAULT     ANDROID_LOG_DEFAULT

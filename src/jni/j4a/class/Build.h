@@ -6,8 +6,7 @@ Description:
 
 */
 
-
-
+#include "j4a/j4a_base.h"
 
 int J4A_loadClass__J4AC_android_os_Build(JNIEnv *env);
 

@@ -7,13 +7,10 @@ Description:
 */
 
 
-#include <pthread.h>
-
 #include "j4a/j4a_base.h"
-
 #include "sdl/sdl_log.h"
 
-#include "message.h"
+#include "test_internal.h"
 
 
 #define JNI_CLASS_TEST "bruce/simple_android_jni_c_demo/test"
@@ -23,19 +20,6 @@ typedef struct simple_test {
 
     jclass clazz;
 } simple_test;
-
-
-typedef struct SimpleTest {
-    volatile int ref_count; //从内存中读取数据，经过计数后，将结果直接放入内存中。
-                            //volatile作用是避免编译器意外修改寄存器中的数据。
-    pthread_mutex_t mutex;
-    
-    MessageQueue msg_queue;
-    SDL_Thread *msg_thread;
-    SDL_Thread _msg_thread;
-
-    void *weak_thiz;
-} SimpleTest;
 
 SimpleTest *g_SimpleTest = NULL;
 

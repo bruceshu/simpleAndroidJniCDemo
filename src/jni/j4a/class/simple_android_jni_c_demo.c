@@ -7,7 +7,7 @@ Description:
 */
 
 
-#include "j4a_base.h"
+#include "simple_android_jni_c_demo.h"
 
 typedef struct J4AC_BRUCE_SIMPLE_ANDROID_JNI_C_DEMO {
     jclass id;

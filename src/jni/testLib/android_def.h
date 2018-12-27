@@ -7,8 +7,8 @@ Description:
 */
 
 
-#ifndef ANDROID_H
-#define ANDROID_H
+#ifndef ANDROID_DEF_H
+#define ANDROID_DEF_H
 
 enum media_event_type {
     MEDIA_NOP               = 0,        // interface test message

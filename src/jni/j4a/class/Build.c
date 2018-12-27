@@ -6,7 +6,7 @@ Description:
 
 */
 
-#include "j4a_base.h"
+#include "Build.h"
 
 typedef struct J4AC_android_os_Build__VERSION {
     jclass id;
@@ -19,8 +19,6 @@ typedef struct J4AC_android_os_Build {
 
 static J4AC_android_os_Build__VERSION class_J4AC_android_os_Build__VERSION;
 static J4AC_android_os_Build class_J4AC_android_os_Build;
-
-
 
 int J4A_loadClass__J4AC_android_os_Build__VERSION(JNIEnv *env)
 {

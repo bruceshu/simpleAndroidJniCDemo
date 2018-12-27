@@ -10,7 +10,7 @@ Description:
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
-#include "sdl_thread.h"
+#include "sdl/sdl_thread.h"
 
 #define MSG_SIMPLE_TEST_BEGIN                       0
 #define MSG_SIMPLE_TEST_END                         0

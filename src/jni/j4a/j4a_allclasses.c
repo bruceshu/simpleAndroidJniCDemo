@@ -7,6 +7,7 @@ Description:
 */
 
 #include "j4a_base.h"
+
 #include "class/Build.h"
 #include "class/simple_android_jni_c_demo.h"
 

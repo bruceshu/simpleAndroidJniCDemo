@@ -6,6 +6,8 @@ Description:
 
 */
 
+#include <stdlib.h>
+
 #include "message.h"
 
 static void msg_init_msg(AVMessage *msg)

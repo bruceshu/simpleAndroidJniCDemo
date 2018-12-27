@@ -35,8 +35,6 @@ Description:
     } while (0)
 
 
-
-int SDL_JNI_ThrowException(JNIEnv* env, const char* className, const char* msg);
 bool J4A_ExceptionCheck__catchAll(JNIEnv *env);
 jclass J4A_NewGlobalRef__catchAll(JNIEnv *env, jobject obj);
 void J4A_DeleteLocalRef(JNIEnv *env, jobject obj);
