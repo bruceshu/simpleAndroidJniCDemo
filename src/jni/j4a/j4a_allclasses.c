@@ -7,8 +7,8 @@ Description:
 */
 
 #include "j4a_base.h"
-#include "Build.h"
-#include "simple_android_jni_c_demo.h"
+#include "class/Build.h"
+#include "class/simple_android_jni_c_demo.h"
 
 int J4A_LoadAll__catchAll(JNIEnv *env)
 {
