@@ -7,6 +7,7 @@ Description:
 */
 
 #include <stdlib.h>
+#include <assert.h>
 
 #include "message.h"
 

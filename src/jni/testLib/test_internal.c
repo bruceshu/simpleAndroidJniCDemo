@@ -10,7 +10,10 @@ Description:
 #include <assert.h>
 #include <unistd.h>
 
+#include "sdl_log.h"
+
 #include "test_internal.h"
+#include "message.h"
 
 void test_demo_inc_ref(SimpleTest *simpleTest)
 {
@@ -67,7 +70,7 @@ SimpleTest *test_demo_create()
     }
     
     pthread_mutex_init(&simpleTest->mutex, NULL);
-    inc_ref(simpleTest);
+    test_demo_inc_ref(simpleTest);
 
     return simpleTest;
 }
