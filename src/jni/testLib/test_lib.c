@@ -9,8 +9,10 @@ Description:
 
 #include <pthread.h>
 
-#include "j4a_base.h"
-#include "ijksdl_log.h"
+#include "j4a/j4a_base.h"
+
+#include "sdl/sdl_log.h"
+
 #include "message.h"
 
 

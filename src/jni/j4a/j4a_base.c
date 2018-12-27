@@ -19,38 +19,6 @@ bool J4A_ExceptionCheck__catchAll(JNIEnv *env)
     return false;
 }
 
-int SDL_JNI_ThrowException(JNIEnv* env, const char* className, const char* msg)
-{
-    if ((*env)->ExceptionCheck(env)) {
-        jthrowable exception = (*env)->ExceptionOccurred(env);
-        (*env)->ExceptionClear(env);
-
-        if (exception != NULL) {
-            ALOGW("Discarding pending exception (%s) to throw", className);
-            (*env)->DeleteLocalRef(env, exception);
-        }
-    }
-
-    jclass exceptionClass = (*env)->FindClass(env, className);
-    if (exceptionClass == NULL) {
-        ALOGE("Unable to find exception class %s", className);
-        /* ClassNotFoundException now pending */
-        goto fail;
-    }
-
-    if ((*env)->ThrowNew(env, exceptionClass, msg) != JNI_OK) {
-        ALOGE("Failed throwing '%s' '%s'", className, msg);
-        /* an exception, most likely OOM, will now be pending */
-        goto fail;
-    }
-
-    return 0;
-fail:
-    if (exceptionClass)
-        (*env)->DeleteLocalRef(env, exceptionClass);
-    return -1;
-}
-
 /********************
  * References
  ********************/

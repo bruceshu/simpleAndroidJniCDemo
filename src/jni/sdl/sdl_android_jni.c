@@ -8,6 +8,12 @@ Description:
 
 #include <jni.h>
 #include <pthread.h>
+#include <unistd.h>
+
+#include "sdl_log.h"
+#include "sdl_android.h"
+
+#include "j4a_base.h"
 
 static JavaVM *g_jvm;
 static pthread_key_t g_thread_key;
@@ -21,6 +27,38 @@ static void SDL_JNI_ThreadDestroyed(void* value)
         (*g_jvm)->DetachCurrentThread(g_jvm);
         pthread_setspecific(g_thread_key, NULL);
     }
+}
+
+int SDL_JNI_ThrowException(JNIEnv* env, const char* className, const char* msg)
+{
+    if ((*env)->ExceptionCheck(env)) {
+        jthrowable exception = (*env)->ExceptionOccurred(env);
+        (*env)->ExceptionClear(env);
+
+        if (exception != NULL) {
+            ALOGW("Discarding pending exception (%s) to throw", className);
+            (*env)->DeleteLocalRef(env, exception);
+        }
+    }
+
+    jclass exceptionClass = (*env)->FindClass(env, className);
+    if (exceptionClass == NULL) {
+        ALOGE("Unable to find exception class %s", className);
+        /* ClassNotFoundException now pending */
+        goto fail;
+    }
+
+    if ((*env)->ThrowNew(env, exceptionClass, msg) != JNI_OK) {
+        ALOGE("Failed throwing '%s' '%s'", className, msg);
+        /* an exception, most likely OOM, will now be pending */
+        goto fail;
+    }
+
+    return 0;
+fail:
+    if (exceptionClass)
+        (*env)->DeleteLocalRef(env, exceptionClass);
+    return -1;
 }
 
 static void make_thread_key()

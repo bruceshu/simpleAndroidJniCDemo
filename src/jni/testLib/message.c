@@ -6,6 +6,8 @@ Description:
 
 */
 
+#include "message.h"
+
 static void msg_init_msg(AVMessage *msg)
 {
     memset(msg, 0, sizeof(AVMessage));

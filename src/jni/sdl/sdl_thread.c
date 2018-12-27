@@ -7,7 +7,12 @@ Description:
 */
 
 
+#include <assert.h>
+#include <unistd.h>
+
 #include "sdl_thread.h"
+#include "sdl_log.h"
+#include "sdl_android_jni.h"
 
 static void *SDL_RunThread(void *data)
 {

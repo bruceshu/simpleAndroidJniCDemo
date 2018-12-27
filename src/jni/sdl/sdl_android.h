@@ -7,9 +7,10 @@ Description:
 */
 
 
-
 #ifndef SDL_ANDROID_H
 #define SDL_ANDROID_H
+
+#include "sdl_android_jni.h"
 
 #define IJK_FIND_JAVA_CLASS(env__, var__, classsign__) \
     do { \
