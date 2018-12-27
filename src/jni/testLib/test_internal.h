@@ -13,8 +13,7 @@ Description:
 
 #include <pthread.h>
 
-#include "sdl/sdl_thread.h"
-
+#include "sdl_thread.h"
 #include "message.h"
 
 typedef struct SimpleTest {
