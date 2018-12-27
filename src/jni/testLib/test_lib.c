@@ -13,6 +13,8 @@ Description:
 #include "test_internal.h"
 
 
+
+
 #define JNI_CLASS_TEST "bruce/simple_android_jni_c_demo/test"
 
 typedef struct simple_test {

@@ -11,7 +11,7 @@ Description:
 #define SDL_MISC_H
 
 #include <stdlib.h>
-#include <typedef.h>
+#include <stddef.h>
 
 #ifndef NELEM
 #define NELEM(x) ((int) (sizeof(x) / sizeof((x)[0])))
