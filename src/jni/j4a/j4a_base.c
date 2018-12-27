@@ -7,7 +7,7 @@ Description:
 */
 
 #include "j4a_base.h"
-#include "j4a/class/Build.h"
+#include "class/Build.h"
 
 bool J4A_ExceptionCheck__catchAll(JNIEnv *env)
 {

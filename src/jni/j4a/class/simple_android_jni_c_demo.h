@@ -9,7 +9,7 @@ Description:
 #ifndef SIMPLE_ANDROID_JNI_C_DEMO_H
 #define SIMPLE_ANDROID_JNI_C_DEMO_H
 
-#include "j4a/j4a_base.h"
+#include "j4a_base.h"
 
 void J4AC_bruce_simple_android_jni_c_demo__postEventFromNative__catchAll(JNIEnv *env, jobject weakThiz, jint what, jint arg1, jint arg2, jobject obj);
 jlong J4AC_bruce_simple_android_jni_c_demo__mNativeTestDemo__get__catchAll(JNIEnv *env, jobject thiz);
