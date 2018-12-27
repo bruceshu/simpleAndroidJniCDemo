@@ -11,6 +11,7 @@ Description:
 #include <unistd.h>
 
 #include "sdl_log.h"
+#include "sdl_mic.h"
 
 #include "test_internal.h"
 #include "message.h"
