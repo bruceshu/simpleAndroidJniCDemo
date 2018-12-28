@@ -7,6 +7,9 @@ import android.util.Log;
 
 import java.lang.ref.WeakReference;
 
+import bruce.simple_android_jni_c_demo.annotations.AccessedByNative;
+import bruce.simple_android_jni_c_demo.annotations.CalledByNative;
+
 /**
  * Created by shuh on 2018/12/11.
  */
@@ -27,24 +30,15 @@ public class TestDemo extends AbstractTestDemo{
     public static void loadLibrariesOnce() {
         synchronized (TestDemo.class) {
             if (!mIsLibLoaded) {
-                System.loadLibrary("test_lib");
-            }
-            mIsLibLoaded = true;
-        }
-    }
-
-    private static volatile boolean mIsNativeInitialized = false;
-    private static void initNativeOnce() {
-        synchronized (TestDemo.class) {
-            if (!mIsNativeInitialized) {
-                mIsNativeInitialized = true;
+                System.loadLibrary("sdl");
+                System.loadLibrary("test");
+                mIsLibLoaded = true;
             }
         }
     }
 
     private void initTestDemo() {
         loadLibrariesOnce();
-        initNativeOnce();
 
         Looper looper;
         if ((looper = Looper.myLooper()) != null) {

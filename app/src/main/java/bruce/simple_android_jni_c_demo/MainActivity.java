@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         mTestDemo.setOnTestListener(mTestListener);
         mTestDemo.native_begin();
+        mTestDemo.native_end();
     }
 
     private TestDemo createTestDemo() {
@@ -28,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        mTestDemo.native_end();
+        mTestDemo.native_release();
     }
 
     ITestDemo.OnTestListener mTestListener = new ITestDemo.OnTestListener() {
