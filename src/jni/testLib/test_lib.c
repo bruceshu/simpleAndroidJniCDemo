@@ -198,7 +198,7 @@ static void SimpleTest_native_release(JNIEnv *env, jobject thiz)
 }
 
 static JNINativeMethod g_methods[] = {
-    { "_native_setup",     "()V", (void *) SimpleTest_native_setup },
+    { "_native_setup",     "(Ljava/lang/Object;)V", (void *) SimpleTest_native_setup },
     { "_native_begin",     "()V", (void *) SimpleTest_native_begin },
     { "_native_end",       "()V", (void *) SimpleTest_native_end },
     { "_native_release",   "()V", (void *) SimpleTest_native_release },
