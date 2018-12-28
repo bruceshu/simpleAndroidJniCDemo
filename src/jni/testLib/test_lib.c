@@ -6,13 +6,19 @@ Description:
 
 */
 
+#include <assert.h>
 
 #include "j4a_base.h"
 #include "sdl_log.h"
+#include "sdl_android.h"
+#include "sdl_android_jni.h"
+#include "sdl_mic.h"
 
 #include "test_internal.h"
+#include "android_def.h"
+#include "message.h"
 
-
+#include "class/simple_android_jni_c_demo.h"
 
 
 #define JNI_CLASS_TEST "bruce/simple_android_jni_c_demo/test"
@@ -56,11 +62,17 @@ static void message_loop_n(JNIEnv *env, SimpleTest *simpleTest)
         switch (msg.what) {
         case MSG_SIMPLE_TEST_BEGIN:
             ALOGV("MSG_SIMPLE_TEST_BEGIN\n");
-            post_event(env, weak_thiz, MEDIA_NOP, MEDIA_NOP, 0);
+            post_event(env, weak_thiz, MEDIA_NOP, 0, 0);
             break;
         case MSG_SIMPLE_TEST_END:
             ALOGV("MSG_SIMPLE_TEST_END\n");
-            post_event(env, weak_thiz, MEDIA_NOP, MEDIA_NOP, 0);
+            if (msg.obj) {
+                jstring text = (*env)->NewStringUTF(env, (char *)msg.obj);
+                post_event2(env, weak_thiz, MEDIA_NOP, 0, 0, text);
+                J4A_DeleteLocalRef__p(env, &text);
+            } else {
+                post_event2(env, weak_thiz, MEDIA_NOP, 0, 0, NULL);
+            }
             break;
         default:
             ALOGE("unknown MSG_xxx(%d)\n", msg.what);
@@ -89,7 +101,7 @@ static int message_loop(void *arg)
     message_loop_n(env, simpleTest);
 
 LABEL_RETURN:
-    test_demo_dec_ref(&simpleTest);
+    test_demo_dec_ref(simpleTest);
 
     ALOGV("message_loop exit");
     return 0;
@@ -117,7 +129,7 @@ static SimpleTest *jni_get_test_demo(JNIEnv* env, jobject thiz)
 
     SimpleTest *simpleTest = (SimpleTest *) (intptr_t) J4AC_bruce_simple_android_jni_c_demo__mNativeTestDemo__get__catchAll(env, thiz);
     if (simpleTest) {
-        inc_ref(simpleTest);
+        test_demo_inc_ref(simpleTest);
     }
 
     pthread_mutex_unlock(&g_clazz.mutex);
@@ -176,7 +188,7 @@ static void SimpleTest_native_release(JNIEnv *env, jobject thiz)
     if (!simpleTest)
         return;
 
-    jobject weak_thiz = (jobject) test_demo_set_weak_thiz(mp, NULL );
+    jobject weak_thiz = (jobject) test_demo_set_weak_thiz(simpleTest, NULL );
     (*env)->DeleteGlobalRef(env, weak_thiz);
     jni_set_test_demo(env, thiz, NULL);
     

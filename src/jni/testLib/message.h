@@ -13,7 +13,7 @@ Description:
 #include "sdl_thread.h"
 
 #define MSG_SIMPLE_TEST_BEGIN                       0
-#define MSG_SIMPLE_TEST_END                         0
+#define MSG_SIMPLE_TEST_END                         1
 
 typedef struct AVMessage {
     int what;

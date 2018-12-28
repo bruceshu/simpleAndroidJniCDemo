@@ -12,6 +12,8 @@ Description:
 #include <jni.h>
 
 void SDL_JNI_DetachThreadEnv();
+jint SDL_JNI_SetupThreadEnv(JNIEnv **p_env);
+
 int SDL_JNI_ThrowException(JNIEnv* env, const char* className, const char* msg);
 
 #endif
