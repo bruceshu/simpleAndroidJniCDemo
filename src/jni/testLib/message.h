@@ -44,7 +44,7 @@ typedef struct SimpleTest {
     void *weak_thiz;
 } SimpleTest;
 
-void notify_msg1(MessageQueue *msg_queue, int what);
+void notify_msg(MessageQueue *msg_queue, int what);
 void msg_queue_abort(MessageQueue *q);
 void msg_free_res(AVMessage *msg);
 int ijkmp_get_msg(SimpleTest *simpleTest, AVMessage *msg, int block);

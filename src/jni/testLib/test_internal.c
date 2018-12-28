@@ -65,7 +65,7 @@ void *test_demo_set_weak_thiz(SimpleTest *simpleTest, void *weak_thiz)
 
 SimpleTest *test_demo_create()
 {
-    SimpleTest *simpleTest = mallocz(sizeof(SimpleTest);
+    SimpleTest *simpleTest = mallocz(sizeof(SimpleTest));
     if (!simpleTest) {
         ALOGE("malloc g_SimpleTest failed!\n");
     }

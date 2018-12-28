@@ -107,7 +107,7 @@ LABEL_RETURN:
     return 0;
 }
 
-static void *jni_set_test_demo(JNIEnv* env, jobject thiz, SimpleTest *simpleTest)
+static SimpleTest *jni_set_test_demo(JNIEnv* env, jobject thiz, SimpleTest *simpleTest)
 {
     pthread_mutex_lock(&g_clazz.mutex);
     SimpleTest *old = (SimpleTest*) (intptr_t) J4AC_bruce_simple_android_jni_c_demo__mNativeTestDemo__get__catchAll(env, thiz);
@@ -121,6 +121,8 @@ static void *jni_set_test_demo(JNIEnv* env, jobject thiz, SimpleTest *simpleTest
     if (old != NULL ) {
         test_demo_dec_ref(old);
     }
+
+    return old;
 }
 
 static SimpleTest *jni_get_test_demo(JNIEnv* env, jobject thiz)
@@ -154,7 +156,7 @@ LABEL_RETURN:
 static void SimpleTest_native_begin(JNIEnv *env, jobject thiz)
 {
     ALOGV("%s\n", __func__);
-    SimpleTest *simpleTest = jni_get_test_demo(JNIEnv *env, jobject thiz);
+    SimpleTest *simpleTest = jni_get_test_demo(env, thiz);
     JNI_CHECK_GOTO(simpleTest, env, "java/lang/IllegalStateException", "jni: native_begin: null simpleTest", LABEL_RETURN);
     
     simpleTest->msg_thread = SDL_CreateThreadEx(&simpleTest->_msg_thread, message_loop, simpleTest, "msg_loop");
@@ -172,7 +174,7 @@ LABEL_RETURN:
 static void SimpleTest_native_end(JNIEnv *env, jobject thiz)
 {
     ALOGV("%s\n", __func__);
-    SimpleTest *simpleTest = jni_get_test_demo(JNIEnv *env, jobject thiz);
+    SimpleTest *simpleTest = jni_get_test_demo(env, thiz);
     JNI_CHECK_GOTO(simpleTest, env, "java/lang/IllegalStateException", "jni: native_begin: null simpleTest", LABEL_RETURN);
      
     notify_msg(&simpleTest->msg_queue, MSG_SIMPLE_TEST_END);
