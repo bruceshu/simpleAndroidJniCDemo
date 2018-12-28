@@ -21,7 +21,7 @@ Description:
 #include "class/simple_android_jni_c_demo.h"
 
 
-#define JNI_CLASS_TEST "bruce/simple_android_jni_c_demo/test"
+#define JNI_CLASS_TEST "bruce/simple_android_jni_c_demo/TestDemo"
 
 typedef struct simple_test {
     pthread_mutex_t mutex;
