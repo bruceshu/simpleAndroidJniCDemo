@@ -56,12 +56,16 @@ public class TestDemo extends AbstractTestDemo{
         initTestDemo();
     }
 
-    public void native_begin() {
-        _native_begin();
+    public void prepare() {
+        _prepare();
     }
 
-    public void native_end() {
-        _native_end();
+    public void sendMessageBegin() {
+        _sendMessageBegin();
+    }
+
+    public void sendMessageEnd() {
+        _sendMessageEnd();
     }
 
     public void test_print() {
@@ -104,6 +108,7 @@ public class TestDemo extends AbstractTestDemo{
             TestDemo test = mTestDemo.get();
             switch (msg.what) {
                 case MEDIA_NOP:
+                    Log.d(TAG, "handleMessage: MEDIA_NOP");
                     test.notifyOnTest();
                     return;
                 default:
@@ -113,7 +118,8 @@ public class TestDemo extends AbstractTestDemo{
     }
 
     private native void _native_setup(Object TestDemo_this);
-    private native void _native_begin();
-    private native void _native_end();
+    private native void _prepare();
+    private native void _sendMessageBegin();
+    private native void _sendMessageEnd();
     private native void _native_release();
 }

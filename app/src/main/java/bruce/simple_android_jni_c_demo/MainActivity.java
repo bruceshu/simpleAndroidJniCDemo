@@ -18,8 +18,9 @@ public class MainActivity extends AppCompatActivity {
         mTestDemo = createTestDemo();
 
         mTestDemo.setOnTestListener(mTestListener);
-        mTestDemo.native_begin();
-        mTestDemo.native_end();
+        mTestDemo.prepare();
+        mTestDemo.sendMessageBegin();
+        mTestDemo.sendMessageEnd();
     }
 
     private TestDemo createTestDemo() {

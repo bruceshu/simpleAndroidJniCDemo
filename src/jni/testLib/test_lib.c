@@ -145,14 +145,12 @@ static void SimpleTest_native_setup(JNIEnv *env, jobject thiz, jobject weak_this
 
     jni_set_test_demo(env, thiz, simpleTest);
     test_demo_set_weak_thiz(simpleTest, (*env)->NewGlobalRef(env, weak_this));
-
-    ALOGV("bruce >>> hello world!");
-
+    
 LABEL_RETURN:
     test_demo_dec_ref(simpleTest);
 }
 
-static void SimpleTest_native_begin(JNIEnv *env, jobject thiz)
+static void SimpleTest_prepare(JNIEnv *env, jobject thiz)
 {
     ALOGV("%s\n", __func__);
     SimpleTest *simpleTest = jni_get_test_demo(env, thiz);
@@ -164,13 +162,23 @@ static void SimpleTest_native_begin(JNIEnv *env, jobject thiz)
         goto LABEL_RETURN;
     }
     
+LABEL_RETURN:
+    test_demo_dec_ref(simpleTest);
+}
+
+static void SimpleTest_sendMessageBegin(JNIEnv *env, jobject thiz)
+{
+    ALOGV("%s\n", __func__);
+    SimpleTest *simpleTest = jni_get_test_demo(env, thiz);
+    JNI_CHECK_GOTO(simpleTest, env, "java/lang/IllegalStateException", "jni: native_begin: null simpleTest", LABEL_RETURN);
+    
     notify_msg(&simpleTest->msg_queue, MSG_SIMPLE_TEST_BEGIN);
     
 LABEL_RETURN:
     test_demo_dec_ref(simpleTest);
 }
 
-static void SimpleTest_native_end(JNIEnv *env, jobject thiz)
+static void SimpleTest_sendMessageEnd(JNIEnv *env, jobject thiz)
 {
     ALOGV("%s\n", __func__);
     SimpleTest *simpleTest = jni_get_test_demo(env, thiz);
@@ -197,10 +205,11 @@ static void SimpleTest_native_release(JNIEnv *env, jobject thiz)
 }
 
 static JNINativeMethod g_methods[] = {
-    { "_native_setup",     "(Ljava/lang/Object;)V", (void *) SimpleTest_native_setup },
-    { "_native_begin",     "()V", (void *) SimpleTest_native_begin },
-    { "_native_end",       "()V", (void *) SimpleTest_native_end },
-    { "_native_release",   "()V", (void *) SimpleTest_native_release },
+    { "_native_setup",         "(Ljava/lang/Object;)V", (void *) SimpleTest_native_setup },
+    { "_prepare",              "()V", (void *) SimpleTest_prepare },
+    { "_sendMessageBegin",     "()V", (void *) SimpleTest_sendMessageBegin },
+    { "_sendMessageEnd",       "()V", (void *) SimpleTest_sendMessageEnd },
+    { "_native_release",       "()V", (void *) SimpleTest_native_release },
 };
 
 JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
