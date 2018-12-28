@@ -21,7 +21,6 @@ static void *SDL_RunThread(void *data)
     pthread_setname_np(pthread_self(), thread->name);
     thread->retval = thread->func(thread->data);
     
-    ALOGV("bruce >>> __ANDROID__ = %d\n", __ANDROID__);
 #ifdef __ANDROID__
     SDL_JNI_DetachThreadEnv();
 #endif

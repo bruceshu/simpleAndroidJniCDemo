@@ -133,7 +133,6 @@ int ijkmp_get_msg(SimpleTest *simpleTest, AVMessage *msg, int block)
         if (retval <= 0)
             return retval;
 
-#if 0
         switch (msg->what) {
             
         }
@@ -142,7 +141,6 @@ int ijkmp_get_msg(SimpleTest *simpleTest, AVMessage *msg, int block)
             msg_free_res(msg);
             continue;
         }
-#endif
 
         return retval;
     }

@@ -29,8 +29,6 @@ typedef struct simple_test {
     jclass clazz;
 } simple_test;
 
-SimpleTest *g_SimpleTest = NULL;
-
 static simple_test g_clazz;
 static JavaVM* g_jvm;
 
@@ -46,6 +44,7 @@ static void post_event2(JNIEnv *env, jobject weak_this, int what, int arg1, int 
 
 static void message_loop_n(JNIEnv *env, SimpleTest *simpleTest)
 {
+    ALOGV("%s\n", __func__);
     jobject weak_thiz = (jobject) test_demo_get_weak_thiz(simpleTest);
     JNI_CHECK_GOTO(weak_thiz, env, NULL, NULL, LABEL_RETURN);
     
@@ -165,7 +164,7 @@ static void SimpleTest_native_begin(JNIEnv *env, jobject thiz)
         goto LABEL_RETURN;
     }
     
-    notify_msg(&g_SimpleTest->msg_queue, MSG_SIMPLE_TEST_BEGIN);
+    notify_msg(&simpleTest->msg_queue, MSG_SIMPLE_TEST_BEGIN);
     
 LABEL_RETURN:
     test_demo_dec_ref(simpleTest);
