@@ -85,7 +85,7 @@ int J4A_loadClass__J4AC_bruce_simple_android_jni_c_demo(JNIEnv *env)
     if (class_J4AC_bruce_simple_android_jni_c_demo.method_postEventFromNative == NULL)
         goto fail;
     
-    J4A_ALOGD("J4ALoader: OK: '%s' loaded\n", "bruce.simple_android_jni_c_demo");
+    J4A_ALOGD("J4ALoader: OK: '%s' loaded\n", "bruce.simple_android_jni_c_demo.TestDemo");
     ret = 0;
     
 fail:
