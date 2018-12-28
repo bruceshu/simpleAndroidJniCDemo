@@ -66,7 +66,7 @@ int J4A_loadClass__J4AC_bruce_simple_android_jni_c_demo(JNIEnv *env)
     if (class_J4AC_bruce_simple_android_jni_c_demo.id != NULL)
         return 0;
 
-    sign = "bruce_base/simple_android_jni_c_demo";
+    sign = "bruce/simple_android_jni_c_demo";
     class_J4AC_bruce_simple_android_jni_c_demo.id = J4A_FindClass__asGlobalRef__catchAll(env, sign);
     if (class_J4AC_bruce_simple_android_jni_c_demo.id == NULL)
         goto fail;
@@ -84,7 +84,6 @@ int J4A_loadClass__J4AC_bruce_simple_android_jni_c_demo(JNIEnv *env)
     class_J4AC_bruce_simple_android_jni_c_demo.method_postEventFromNative = J4A_GetStaticMethodID__catchAll(env, class_id, name, sign);
     if (class_J4AC_bruce_simple_android_jni_c_demo.method_postEventFromNative == NULL)
         goto fail;
-    
     
     J4A_ALOGD("J4ALoader: OK: '%s' loaded\n", "bruce_base.simpleandroidjnicdemo");
     ret = 0;
