@@ -123,7 +123,7 @@ void msg_queue_start(MessageQueue *q)
 
 void msg_queue_init(MessageQueue *messageQueue)
 {
-    memset(q, 0, sizeof(MessageQueue));
+    memset(messageQueue, 0, sizeof(MessageQueue));
     messageQueue->mutex = SDL_CreateMutex();
     messageQueue->cond = SDL_CreateCond();
     messageQueue->abort_request = 1;

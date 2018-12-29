@@ -52,6 +52,6 @@ void msg_free_res(AVMessage *msg);
 
 void msg_queue_abort(MessageQueue *q);
 void msg_queue_init(MessageQueue *messageQueue);
-
+void msg_queue_start(MessageQueue *q);
 
 #endif
