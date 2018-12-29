@@ -39,6 +39,11 @@ int SDL_UnlockMutex(SDL_mutex *mutex);
 int SDL_CondSignal(SDL_cond *cond);
 int SDL_CondWait(SDL_cond *cond, SDL_mutex *mutex);
 
+SDL_cond *SDL_CreateCond(void);
+SDL_mutex *SDL_CreateMutex(void);
+void SDL_DestroyMutex(SDL_mutex *mutex);
+void SDL_DestroyCond(SDL_cond *cond);
+
 
 
 #endif

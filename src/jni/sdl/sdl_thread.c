@@ -13,6 +13,7 @@ Description:
 #include "sdl_thread.h"
 #include "sdl_log.h"
 #include "sdl_android_jni.h"
+#include "sdl_mic.h"
 
 static void *SDL_RunThread(void *data)
 {
@@ -84,4 +85,50 @@ int SDL_CondWait(SDL_cond *cond, SDL_mutex *mutex)
     assert(mutex);
 
     return pthread_cond_wait(&cond->id, &mutex->id);
+}
+
+SDL_mutex *SDL_CreateMutex(void)
+{
+    SDL_mutex *mutex;
+    mutex = (SDL_mutex *) mallocz(sizeof(SDL_mutex));
+    if (!mutex)
+        return NULL;
+
+    if (pthread_mutex_init(&mutex->id, NULL) != 0) {
+        free(mutex);
+        return NULL;
+    }
+
+    return mutex;
+}
+
+SDL_cond *SDL_CreateCond(void)
+{
+    SDL_cond *cond;
+    cond = (SDL_cond *) mallocz(sizeof(SDL_cond));
+    if (!cond)
+        return NULL;
+
+    if (pthread_cond_init(&cond->id, NULL) != 0) {
+        free(cond);
+        return NULL;
+    }
+
+    return cond;
+}
+
+void SDL_DestroyMutex(SDL_mutex *mutex)
+{
+    if (mutex) {
+        pthread_mutex_destroy(&mutex->id);
+        free(mutex);
+    }
+}
+
+void SDL_DestroyCond(SDL_cond *cond)
+{
+    if (cond) {
+        pthread_cond_destroy(&cond->id);
+        free(cond);
+    }
 }

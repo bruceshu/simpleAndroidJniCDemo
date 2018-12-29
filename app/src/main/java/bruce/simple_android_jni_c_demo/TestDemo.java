@@ -73,7 +73,12 @@ public class TestDemo extends AbstractTestDemo{
     }
 
     public void native_release() {
+        resetListeners();
         _native_release();
+    }
+
+    public void resetListeners() {
+        super.resetListeners();
     }
 
     @CalledByNative

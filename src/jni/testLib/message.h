@@ -12,6 +12,7 @@ Description:
 
 #include "sdl_thread.h"
 
+#define MSG_FLUSH                                   10000
 #define MSG_SIMPLE_TEST_BEGIN                       0
 #define MSG_SIMPLE_TEST_END                         1
 
@@ -45,9 +46,12 @@ typedef struct SimpleTest {
 } SimpleTest;
 
 void notify_msg(MessageQueue *msg_queue, int what);
-void msg_queue_abort(MessageQueue *q);
+
+int get_msg(SimpleTest *simpleTest, AVMessage *msg, int block);
 void msg_free_res(AVMessage *msg);
-int ijkmp_get_msg(SimpleTest *simpleTest, AVMessage *msg, int block);
+
+void msg_queue_abort(MessageQueue *q);
+void msg_queue_init(MessageQueue *messageQueue);
 
 
 #endif

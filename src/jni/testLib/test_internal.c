@@ -69,6 +69,8 @@ SimpleTest *test_demo_create()
     if (!simpleTest) {
         ALOGE("malloc g_SimpleTest failed!\n");
     }
+
+    msg_queue_init(&simpleTest->msg_queue);
     
     pthread_mutex_init(&simpleTest->mutex, NULL);
     test_demo_inc_ref(simpleTest);

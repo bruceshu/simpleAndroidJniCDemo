@@ -51,7 +51,7 @@ static void message_loop_n(JNIEnv *env, SimpleTest *simpleTest)
     while (1) {
         AVMessage msg;
 
-        int retval = ijkmp_get_msg(simpleTest, &msg, 1);
+        int retval = get_msg(simpleTest, &msg, 1);
         if (retval < 0)
             break;
 
@@ -155,7 +155,8 @@ static void SimpleTest_prepare(JNIEnv *env, jobject thiz)
     ALOGV("%s\n", __func__);
     SimpleTest *simpleTest = jni_get_test_demo(env, thiz);
     JNI_CHECK_GOTO(simpleTest, env, "java/lang/IllegalStateException", "jni: native_begin: null simpleTest", LABEL_RETURN);
-    
+
+    msg_queue_start(&simpleTest->msg_queue);
     simpleTest->msg_thread = SDL_CreateThreadEx(&simpleTest->_msg_thread, message_loop, simpleTest, "msg_loop");
     if (!simpleTest->msg_thread) {
         ALOGE("create msg loop failed!\n"); 
@@ -200,6 +201,8 @@ static void SimpleTest_native_release(JNIEnv *env, jobject thiz)
     jobject weak_thiz = (jobject) test_demo_set_weak_thiz(simpleTest, NULL );
     (*env)->DeleteGlobalRef(env, weak_thiz);
     jni_set_test_demo(env, thiz, NULL);
+
+    msg_queue_abort(&simpleTest->msg_queue);
     
     test_demo_dec_ref(simpleTest);
 }

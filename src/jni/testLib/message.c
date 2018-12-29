@@ -9,6 +9,8 @@ Description:
 #include <stdlib.h>
 #include <assert.h>
 
+#include "sdl_thread.h"
+
 #include "message.h"
 
 static void msg_init_msg(AVMessage *msg)
@@ -73,22 +75,6 @@ void msg_queue_abort(MessageQueue *q)
     SDL_UnlockMutex(q->mutex);
 }
 
-void msg_free_res(AVMessage *msg)
-{
-    if (!msg || !msg->obj)
-        return;
-    
-    assert(msg->free_l);
-    
-    msg->free_l(msg->obj);
-    msg->obj = NULL;
-}
-
-void notify_msg(MessageQueue *msg_queue, int what) 
-{
-    msg_queue_put_simple3(msg_queue, what, 0, 0);
-}
-
 static int msg_queue_get(MessageQueue *q, AVMessage *msg, int block)
 {
     AVMessage *msg1;
@@ -123,7 +109,52 @@ static int msg_queue_get(MessageQueue *q, AVMessage *msg, int block)
     return ret;
 }
 
-int ijkmp_get_msg(SimpleTest *simpleTest, AVMessage *msg, int block)
+void msg_queue_start(MessageQueue *q)
+{
+    SDL_LockMutex(q->mutex);
+    q->abort_request = 0;
+
+    AVMessage msg;
+    msg_init_msg(&msg);
+    msg.what = MSG_FLUSH;
+    msg_queue_put_private(q, &msg);
+    SDL_UnlockMutex(q->mutex);
+}
+
+void msg_queue_init(MessageQueue *messageQueue)
+{
+    memset(q, 0, sizeof(MessageQueue));
+    messageQueue->mutex = SDL_CreateMutex();
+    messageQueue->cond = SDL_CreateCond();
+    messageQueue->abort_request = 1;
+}
+
+static void msg_queue_flush(MessageQueue *q)
+{
+    AVMessage *msg, *msg1;
+
+    SDL_LockMutex(q->mutex);
+    for (msg = q->first_msg; msg != NULL; msg = msg1) {
+        msg1 = msg->next;
+        msg_free_res(msg);
+        free(msg);
+    }
+    
+    q->last_msg = NULL;
+    q->first_msg = NULL;
+    q->nb_messages = 0;
+    SDL_UnlockMutex(q->mutex);
+}
+
+void msg_queue_destroy(MessageQueue *q)
+{
+    msg_queue_flush(q);
+
+    SDL_DestroyMutex(q->mutex);
+    SDL_DestroyCond(q->cond);
+}
+
+int get_msg(SimpleTest *simpleTest, AVMessage *msg, int block)
 {
     assert(simpleTest);
     
@@ -146,3 +177,18 @@ int ijkmp_get_msg(SimpleTest *simpleTest, AVMessage *msg, int block)
     }
 }
 
+void notify_msg(MessageQueue *msg_queue, int what) 
+{
+    msg_queue_put_simple3(msg_queue, what, 0, 0);
+}
+
+void msg_free_res(AVMessage *msg)
+{
+    if (!msg || !msg->obj)
+        return;
+    
+    assert(msg->free_l);
+    
+    msg->free_l(msg->obj);
+    msg->obj = NULL;
+}
