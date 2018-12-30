@@ -59,6 +59,9 @@ static void message_loop_n(JNIEnv *env, SimpleTest *simpleTest)
         assert(retval > 0);
 
         switch (msg.what) {
+        case MSG_FLUSH:
+            ALOGV("MSG_FLUSH");
+            break;
         case MSG_SIMPLE_TEST_BEGIN:
             ALOGV("MSG_SIMPLE_TEST_BEGIN\n");
             post_event(env, weak_thiz, MEDIA_NOP, 0, 0);

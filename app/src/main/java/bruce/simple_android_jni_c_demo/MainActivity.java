@@ -19,8 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
         mTestDemo.setOnTestListener(mTestListener);
         mTestDemo.prepare();
-//        mTestDemo.sendMessageBegin();
-//        mTestDemo.sendMessageEnd();
+        mTestDemo.sendMessageBegin();
+        mTestDemo.sendMessageEnd();
     }
 
     private TestDemo createTestDemo() {
@@ -30,7 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        Log.d(TAG, "onBackPressed: ");
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onDestroy() {
         mTestDemo.native_release();
+        super.onDestroy();
     }
 
     ITestDemo.OnTestListener mTestListener = new ITestDemo.OnTestListener() {
