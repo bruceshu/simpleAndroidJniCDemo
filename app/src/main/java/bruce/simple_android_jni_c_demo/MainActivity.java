@@ -7,24 +7,24 @@ import android.util.Log;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "bruce-android";
 
-    TestDemo mTestDemo = null;
+    Player mTestDemo = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        TestDemo.loadLibrariesOnce();
+        Player.loadLibrariesOnce();
 
         mTestDemo = createTestDemo();
 
-        mTestDemo.setOnTestListener(mTestListener);
+        mTestDemo.setOnOneListener(mTestListener);
         mTestDemo.prepare();
         mTestDemo.sendMessageBegin();
         mTestDemo.sendMessageEnd();
     }
 
-    private TestDemo createTestDemo() {
-        TestDemo mTest = new TestDemo();
+    private Player createTestDemo() {
+        Player mTest = new Player();
         return mTest;
     }
 
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    ITestDemo.OnTestListener mTestListener = new ITestDemo.OnTestListener() {
-        public void onTest(ITestDemo test) {
+    IPlayerListener.OnOneListener mTestListener = new IPlayerListener.OnOneListener() {
+        public void onOneTest(IPlayerListener test) {
             Log.i(TAG, "onTest: receive test listener");
         }
     };

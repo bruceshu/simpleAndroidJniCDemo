@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 /**
- * Instrumented TestDemo, which will execute on an Android device.
+ * Instrumented Player, which will execute on an Android device.
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class ExampleInstrumentedTest {
     @Test
     public void useAppContext() throws Exception {
-        // Context of the app under TestDemo.
+        // Context of the app under Player.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("bruce.simple_android_jni_c_demo", appContext.getPackageName());

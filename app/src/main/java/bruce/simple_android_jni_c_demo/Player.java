@@ -14,11 +14,10 @@ import bruce.simple_android_jni_c_demo.annotations.CalledByNative;
  * Created by shuh on 2018/12/11.
  */
 
-public class TestDemo extends AbstractTestDemo{
+public class Player extends AbstractPlayerListener{
     private final static String TAG = "bruce-android";
 
     private static final int MEDIA_NOP = 0;
-
     private static final int MEDIA_INFO = 200;
 
     @AccessedByNative
@@ -27,8 +26,8 @@ public class TestDemo extends AbstractTestDemo{
     private static EventHandler mEventHandler;
 
     private static volatile boolean mIsLibLoaded = false;
-    public static void loadLibrariesOnce() {
-        synchronized (TestDemo.class) {
+    private static void loadLibrariesOnce() {
+        synchronized (Player.class) {
             if (!mIsLibLoaded) {
                 System.loadLibrary("sdl");
                 System.loadLibrary("test");
@@ -37,45 +36,55 @@ public class TestDemo extends AbstractTestDemo{
         }
     }
 
-    private void initTestDemo() {
+    private void initPlayer() {
         loadLibrariesOnce();
 
         Looper looper;
         if ((looper = Looper.myLooper()) != null) {
+            Log.d(TAG, "initTestDemo: Looper.myLooper()：" + Looper.myLooper());
             mEventHandler = new EventHandler(this, looper);
         } else if ((looper = Looper.getMainLooper()) != null) {
+            Log.d(TAG, "initTestDemo: Looper.getMainLooper():" + Looper.getMainLooper());
             mEventHandler = new EventHandler(this, looper);
         } else {
             mEventHandler = null;
         }
 
-        _native_setup(new WeakReference<TestDemo>(this));
+        _native_setup(new WeakReference<Player>(this));
     }
 
-    public TestDemo() {
-        initTestDemo();
-    }
-
-    public void prepare() {
-        _prepare();
-    }
-
-    public void sendMessageBegin() {
-        _sendMessageBegin();
-    }
-
-    public void sendMessageEnd() {
-        _sendMessageEnd();
-    }
-
-    public void test_print() {
-        Log.i(TAG, "test_print: hello bruce");
+    public Player() {
+        initPlayer();
     }
 
     public void native_release() {
         resetListeners();
         _native_release();
     }
+
+    public void prepare() {
+        _prepare();
+    }
+    public void start() {
+        _start();
+    }
+
+    public void pause() {
+        _pause();
+    }
+
+    public void stop() {
+        _stop();
+    }
+
+    public void setVolume(int left, int right) {
+        _setVolume(left, right);
+    }
+
+    public void setMute() {
+        _setVolume(0, 0);
+    }
+
 
     public void resetListeners() {
         super.resetListeners();
@@ -86,45 +95,46 @@ public class TestDemo extends AbstractTestDemo{
         if (weakThiz == null)
             return;
 
-        TestDemo test = (TestDemo) ((WeakReference) weakThiz).get();
-        if (test == null) {
+        Player player = (Player) ((WeakReference) weakThiz).get();
+        if (player == null) {
             return;
         }
 
-        if (what == MEDIA_NOP) {
-            test.test_print();
-        }
-
-        if (test.mEventHandler != null) {
-            Message m = test.mEventHandler.obtainMessage(what, arg1, arg2, obj);
-            test.mEventHandler.sendMessage(m);
+        if (player.mEventHandler != null) {
+            Message m = player.mEventHandler.obtainMessage(what, arg1, arg2, obj);
+            player.mEventHandler.sendMessage(m);
         }
     }
 
     private static class EventHandler extends Handler {
-        private final WeakReference<TestDemo> mTestDemo;
-        public EventHandler(TestDemo test, Looper looper) {
+        private final WeakReference<Player> mPlayer;
+        public EventHandler(Player player, Looper looper) {
             super(looper);
-            mTestDemo = new WeakReference<TestDemo>(test);
+            mPlayer = new WeakReference<Player>(player);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            TestDemo test = mTestDemo.get();
+            Player player = mPlayer.get();
             switch (msg.what) {
                 case MEDIA_NOP:
-                    Log.d(TAG, "handleMessage: MEDIA_NOP");
-                    test.notifyOnTest();
-                    return;
+                    Log.d(TAG, "handleMessage: MEDIA_NOP=" + MEDIA_NOP);
+                    player.notifyOnTest();
+                    break;
+                case MEDIA_INFO:
+                    Log.d(TAG, "handleMessage: MEDIA_INFO" + MEDIA_INFO);
+                    break;
                 default:
                     Log.e(TAG, "Unknown message type " + msg.what);
             }
         }
     }
 
-    private native void _native_setup(Object TestDemo_this);
-    private native void _prepare();
-    private native void _sendMessageBegin();
-    private native void _sendMessageEnd();
+    private native void _native_setup(Object Player_this);
     private native void _native_release();
+    private native void _prepare();
+    private native void _start();
+    private native void _pause();
+    private native void _stop();
+    private native void _setVolume(int left, int right);
 }
